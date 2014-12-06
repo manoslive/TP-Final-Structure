@@ -76,17 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Fonctions.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PreciseTimer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Fonctions.h" />
-    <ClInclude Include="Matrice.h" />
-    <ClInclude Include="PreciseTimer.h" />
-    <ClInclude Include="Sudoku.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
