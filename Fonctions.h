@@ -2,7 +2,7 @@
 // Fonctions.h
 // Fait par Emmanuel Beloin et Shaun Cooper
 // Créer le 6 décembre 2014
-// Dernière modification le 6 décembre 2014
+// Dernière modification le 7 décembre 2014
 // Déclaration des fonctions utilisées
 // par la classe
 ///////////////////////////////////////////
@@ -15,7 +15,9 @@
 //////////////////////////////////////////////////////////////////////
 // Fonction englobe tout les etapes du solutionnage du sudoku   
 // Intrants : entete a afficher                                 
-// Extrant : None                                               
+// Extrant : None 
+// But : Sert à appeler les différentes fonctions permettant de 
+//		 résoudre le sudoku
 //////////////////////////////////////////////////////////////////////
 void SolutionnerSudoku(string entete);
 

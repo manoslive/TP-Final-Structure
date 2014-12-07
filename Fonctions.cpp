@@ -1,9 +1,11 @@
 ///////////////////////////////////////////
-// main.cpp
+// Fonctions.cpp
 // Fait par Emmanuel Beloin et Shaun Cooper
 // Créer le 6 décembre 2014
-// Dernière modification le 6 décembre 2014
-// Résout un sudoku
+// Dernière modification le 7 décembre 2014
+// Corps des fonctions permettant 
+// d'associer les différentes classes 
+// ensemble
 ///////////////////////////////////////////
 #include "Fonctions.h"
 

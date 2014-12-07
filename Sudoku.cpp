@@ -1,14 +1,12 @@
 ///////////////////////////////////////////
-// main.cpp
+// Sudoku.cpp
 // Fait par Emmanuel Beloin et Shaun Cooper
 // Créer le 6 décembre 2014
-// Dernière modification le 6 décembre 2014
-// Résout un sudoku
+// Dernière modification le 7 décembre 2014
+// Corps des méthodes de la classe Sudoku
 ///////////////////////////////////////////
 #include "Sudoku.h"
-const char asterix = '*';
-const char zero = '0';
-const char carriageReturn = '\n';
+
 
 Sudoku::Sudoku(string nom)
 {
@@ -22,52 +20,41 @@ void Sudoku::RemplirMatrice(ifstream & doc)
 {
 	char nombre;
 	if (!doc.fail()) //si le fichier est ouvert
-	{
 		for (int i = 0; i < NBLIGNECOLONNE; i++)
 		{
 			for (int j = 0; j < NBLIGNECOLONNE; j++)
 			{
 				doc.get(nombre);
-				if (nombre == carriageReturn) // Vérifie si ce n'est pas un carriage return
-				{
+				if (nombre == CARRIAGERETURN) // Vérifie si ce n'est pas un carriage return
 					doc.get(nombre);
-				}
-				if (nombre == asterix) // * en 0
-				{
-					nombre = zero;
-				}
-				monSudoku_.at(i).at(j) = nombre + CHARTOINTASCII;
+				if (nombre == ASTERIX) // * en 0
+					nombre = ZERO;
+				monSudoku_.at(i).at(j) = nombre + CONVERSIONCHARENINT;
 			}
 		}
-	}
 	else
-	{
 		throw exception("Le nom du fichier est introuvable");
-	}
 }
 
 void Sudoku::AfficherSudoku()
 {
+	//cout << "-----------" << endl;
 	for (int i = 0; i < NBLIGNECOLONNE; i++)
 	{
 		for (int j = 0; j < NBLIGNECOLONNE; j++)
 		{
-			cout << monSudoku_[i][j];
+			cout << monSudoku_.at(i).at(j);
+			cout << " "; // Espace entre les nombres
 			if (j == NBRECADRAN - 1 || j == 6 - 1)
-			{
-				cout << " ";
-			}
+				cout << " "; // Entre les cadrans
 		}
-		if (i == 3 || i == 6)
-		{
+		if (i == NBRECADRAN || i == NBRECADRAN*2) // Espaces entre les cadrans
 			cout << " ";
-		}
 		cout << endl;
-		if (i == NBRECADRAN - 1 || i == 6 - 1)
-		{
-			cout << endl;
-		}
+		if (i == NBRECADRAN - 1 || i == NBRECADRAN*2 - 1)
+			cout << endl; // carriage return entre les cadrans
 	}
+	//cout << "-----------" << endl;
 }
 
 bool Sudoku::TrouvePosVide(int& ligne, int& colonne)
@@ -83,7 +70,7 @@ bool Sudoku::EstValide(int ligne, int colonne, int nombre)
 {
 	return !UtiliserLigne(ligne, nombre) && 
 		   !UtiliserColonne(colonne, nombre) &&
-		   !UtiliserCadran(ligne - ligne % 3, colonne - colonne % 3, nombre);
+		   !UtiliserCadran(ligne - ligne % NBRECADRAN, colonne - colonne % NBRECADRAN, nombre);
 }
 
 

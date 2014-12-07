@@ -1,9 +1,9 @@
 ///////////////////////////////////////////
-// main.cpp
+// Sudoku.h
 // Fait par Emmanuel Beloin et Shaun Cooper
 // Créer le 6 décembre 2014
-// Dernière modification le 6 décembre 2014
-// Résout un sudoku
+// Dernière modification le 7 décembre 2014
+// Définition de la classe Sudoku
 ///////////////////////////////////////////
 #ifndef _SUDOKU_H
 #define _SUDOKU_H
@@ -16,11 +16,13 @@
 #include <sstream>
 using namespace std;
 
+const char ASTERIX = '*';
+const char ZERO = '0';
+const char CARRIAGERETURN = '\n';
 const int NBLIGNECOLONNE = 9;
 const int NBRECADRAN = 3;
 const int MAUVAISCHIFFRE = 0;
-const int CHARTOINTASCII = -48;
-
+const int CONVERSIONCHARENINT = -48;
 
 class Sudoku
 {
@@ -31,50 +33,51 @@ public:
 	Sudoku(string nom);
 
 	//////////////////////////////////////////////////////////////////////
-	// Constructeur paramétrique  
-	// Intrants :                                  
-	// Extrant :                                                
+	// RemplirMatrice  
+	// Intrants : le fichier text en référence                                 
+	// Extrant : aucun
+	// But : Remplir la matrice du contenu du fichier
 	//////////////////////////////////////////////////////////////////////
 	void RemplirMatrice(ifstream & doc);
 
 	//////////////////////////////////////////////////////////////////////
-	// Constructeur paramétrique  
-	// Intrants :                                  
-	// Extrant :                                                
+	// TrouvePosVide  
+	// Intrants : la colonne et la ligne en référence                                 
+	// Extrant : Si oui ou non il a trouvé une position vide (bool)
+	// But : Trouve une position vide dans la matrice
 	//////////////////////////////////////////////////////////////////////
-	// trouve une position dans le vecteur qui n'a pas de valeur attribué (0)
 	bool TrouvePosVide(int& colonne, int& ligne);
 
 	//////////////////////////////////////////////////////////////////////
-	// Constructeur paramétrique  
-	// Intrants :                                  
-	// Extrant :                                                
+	// EstValide  
+	// Intrants : la ligne, la colonne et le nombre                                 
+	// Extrant : Si oui ou non le nombre est valide (bool)
+	// But : Vérifie si le nombre en intrant pour aller a la position
+	//		 en paramètre
 	//////////////////////////////////////////////////////////////////////
-	// verifie si le nombre entré en parametre peut aller a la position passé en parametre
 	bool EstValide(int colonne, int ligne, int nombre);
 
 	//////////////////////////////////////////////////////////////////////
-	// Constructeur paramétrique  
-	// Intrants :                                  
-	// Extrant :                                                
+	// Resoudre  
+	// Intrants : Aucun                                 
+	// Extrant : Si oui ou non il est résoulu
+	// But : Essaie de résoudre le sudoku
 	//////////////////////////////////////////////////////////////////////
-	//essaie de resoudre le sudoku
 	bool Resoudre();
 
 	//////////////////////////////////////////////////////////////////////
-	// Constructeur paramétrique  
-	// Intrants :                                  
+	// UtiliserColonne  
+	// Intrants : La colonne à vérifier et le nombre                                 
 	// Extrant : Si oui ou non la nombre est utiliser (bool) 
-	// But : 
+	// But : Vérifie si le nombre est dans la colonne passée en paramètre
 	//////////////////////////////////////////////////////////////////////
-	// verifie si la valeur entré en parametre est dans la colonne donné
 	bool UtiliserColonne(int colonne, int nombre);
 
 	//////////////////////////////////////////////////////////////////////
-	// Constructeur paramétrique  
-	// Intrants :                                  
-	// Extrant : Si oui ou non la nombre est utiliser (bool)                                                 
-	// But : Vérifie si le nombre se trouve dans la ligne
+	// UtiliserLigne  
+	// Intrants : La ligne à vérifier et le nombre                                   
+	// Extrant : Si oui ou non la nombre est utiliser (bool)
+	// But : Vérifie si le nombre est dans la ligne passée en paramètre
 	//////////////////////////////////////////////////////////////////////
 	bool UtiliserLigne(int ligne, int nombre);
 
