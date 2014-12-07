@@ -76,7 +76,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Compteur.cpp" />
+    <ClCompile Include="Fonctions.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrice.cpp" />
+    <ClCompile Include="Sudoku.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Compteur.h" />
+    <ClInclude Include="Fonctions.h" />
+    <ClInclude Include="Matrice.h" />
+    <ClInclude Include="Sudoku.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
