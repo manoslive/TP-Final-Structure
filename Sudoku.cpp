@@ -22,15 +22,15 @@ void Sudoku::RemplirMatrice(ifstream & doc)
 	if (!doc.fail()) //si le fichier est ouvert
 		for (int i = 0; i < NBLIGNECOLONNE; i++)
 		{
-			for (int j = 0; j < NBLIGNECOLONNE; j++)
-			{
+		for (int j = 0; j < NBLIGNECOLONNE; j++)
+		{
+			doc.get(nombre);
+			if (nombre == CARRIAGERETURN) // Vérifie si ce n'est pas un carriage return
 				doc.get(nombre);
-				if (nombre == CARRIAGERETURN) // Vérifie si ce n'est pas un carriage return
-					doc.get(nombre);
-				if (nombre == ASTERIX) // * en 0
-					nombre = ZERO;
-				monSudoku_.at(i).at(j) = nombre + CONVERSIONCHARENINT;
-			}
+			if (nombre == ASTERIX) // * en 0
+				nombre = ZERO;
+			monSudoku_.at(i).at(j) = nombre + CONVERSIONCHARENINT;
+		}
 		}
 	else
 		throw exception("Le nom du fichier est introuvable");
@@ -38,23 +38,21 @@ void Sudoku::RemplirMatrice(ifstream & doc)
 
 void Sudoku::AfficherSudoku()
 {
-	//cout << "-----------" << endl;
-	for (int i = 0; i < NBLIGNECOLONNE; i++)
+	for (int i = 0; i < NBLIGNECOLONNE; i++) // i = rangée
 	{
-		for (int j = 0; j < NBLIGNECOLONNE; j++)
+		for (int j = 0; j < NBLIGNECOLONNE; j++) // j = colonne
 		{
 			cout << monSudoku_.at(i).at(j);
-			cout << " "; // Espace entre les nombres
+			cout << "  "; // Espace entre les nombres
 			if (j == NBRECADRAN - 1 || j == 6 - 1)
-				cout << " "; // Entre les cadrans
+				cout << "  "; // Entre les cadrans
 		}
-		if (i == NBRECADRAN || i == NBRECADRAN*2) // Espaces entre les cadrans
-			cout << " ";
+		if (i == NBRECADRAN || i == NBRECADRAN * 2) // Espaces entre les cadrans
+			cout << "  ";
 		cout << endl;
-		if (i == NBRECADRAN - 1 || i == NBRECADRAN*2 - 1)
+		if (i == NBRECADRAN - 1 || i == NBRECADRAN * 2 - 1)
 			cout << endl; // carriage return entre les cadrans
 	}
-	//cout << "-----------" << endl;
 }
 
 bool Sudoku::TrouvePosVide(int& ligne, int& colonne)
@@ -68,9 +66,9 @@ bool Sudoku::TrouvePosVide(int& ligne, int& colonne)
 
 bool Sudoku::EstValide(int ligne, int colonne, int nombre)
 {
-	return !UtiliserLigne(ligne, nombre) && 
-		   !UtiliserColonne(colonne, nombre) &&
-		   !UtiliserCadran(ligne - ligne % NBRECADRAN, colonne - colonne % NBRECADRAN, nombre);
+	return !UtiliserLigne(ligne, nombre) &&
+		!UtiliserColonne(colonne, nombre) &&
+		!UtiliserCadran(ligne - ligne % NBRECADRAN, colonne - colonne % NBRECADRAN, nombre);
 }
 
 
