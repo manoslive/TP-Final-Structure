@@ -7,10 +7,11 @@
 ///////////////////////////////////////////
 #include "Fonctions.h"
 
+
 int main()
-{
+{	
 	setlocale(LC_ALL, ""); // Permet d'afficher les différents accents de la langue française dans le cout
 	string fichierText = "sudoku";
-	SolutionnerSudoku(fichierText);
+	SolutionnerSudoku(fichierText, cout);
 	return 0;
 }

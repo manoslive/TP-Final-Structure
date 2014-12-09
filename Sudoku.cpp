@@ -36,22 +36,22 @@ void Sudoku::RemplirMatrice(ifstream & doc)
 		throw exception("Le nom du fichier est introuvable");
 }
 
-void Sudoku::AfficherSudoku()
+void Sudoku::AfficherSudoku(ostream &out)
 {
 	for (int i = 0; i < NBLIGNECOLONNE; i++) // i = rangée
 	{
 		for (int j = 0; j < NBLIGNECOLONNE; j++) // j = colonne
 		{
-			cout << monSudoku_.at(i).at(j);
-			cout << "  "; // Espace entre les nombres
+			out << monSudoku_.at(i).at(j);
+			out << "  "; // Espace entre les nombres
 			if (j == NBRECADRAN - 1 || j == 6 - 1)
-				cout << "  "; // Entre les cadrans
+				out << "  "; // Entre les cadrans
 		}
 		if (i == NBRECADRAN || i == NBRECADRAN * 2) // Espaces entre les cadrans
-			cout << "  ";
-		cout << endl;
+			out << "  ";
+		out << endl;
 		if (i == NBRECADRAN - 1 || i == NBRECADRAN * 2 - 1)
-			cout << endl; // carriage return entre les cadrans
+			out << endl; // carriage return entre les cadrans
 	}
 }
 

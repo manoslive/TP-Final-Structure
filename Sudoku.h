@@ -95,7 +95,7 @@ public:
 	// Extrant : Si oui ou non la nombre est utiliser (bool) 	
 	// But : Affiche le sudoku
 	//////////////////////////////////////////////////////////////////////
-	void AfficherSudoku();
+	void AfficherSudoku(ostream &out);
 
 private:
 	Compteur horloge_;
