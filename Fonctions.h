@@ -19,6 +19,6 @@
 // But : Sert à appeler les différentes fonctions permettant de 
 //		 résoudre le sudoku
 //////////////////////////////////////////////////////////////////////
-void SolutionnerSudoku(string entete);
+void SolutionnerSudoku(string entete, ostream &out);
 
 #endif

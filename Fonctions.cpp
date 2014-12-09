@@ -9,7 +9,7 @@
 ///////////////////////////////////////////
 #include "Fonctions.h"
 
-void SolutionnerSudoku(string entete)
+void SolutionnerSudoku(string entete, ostream &out)
 {
 	Sudoku leSudoku(entete);
 	Compteur timer;
@@ -17,7 +17,7 @@ void SolutionnerSudoku(string entete)
 	if (leSudoku.Resoudre())
 	{
 		timer.Stop(); // On arrête le compteur
-		leSudoku.AfficherSudoku();
+		leSudoku.AfficherSudoku(out);
 		cout << endl << "Résultat (en microsecondes): " << timer.Read() << endl;
 	}
 	else // Si le sudoku n'a pas été résolu
