@@ -12,7 +12,7 @@ Sudoku::Sudoku(string nom)
 {
 	monSudoku_.SetNbLignes(NBLIGNECOLONNE);
 	monSudoku_.SetNbColonnes(NBLIGNECOLONNE);
-	ifstream leSudoku(nom + ".txt");
+	ifstream leSudoku(nom + ".txt"); // Prend en compte le type de fichier
 	RemplirMatrice(leSudoku);
 }
 
@@ -29,7 +29,7 @@ void Sudoku::RemplirMatrice(ifstream & doc)
 				doc.get(nombre);
 			if (nombre == ASTERIX) // * en 0
 				nombre = ZERO;
-			monSudoku_.at(i).at(j) = nombre + CONVERSIONCHARENINT;
+			monSudoku_.at(i).at(j) = nombre + CONVERSIONCHARENINT; // Converti les astérix en 0. Pour ensuite le convertir en int
 		}
 		}
 	else
@@ -57,15 +57,16 @@ void Sudoku::AfficherSudoku()
 
 bool Sudoku::TrouvePosVide(int& ligne, int& colonne)
 {
-	for (ligne = 0; ligne < NBLIGNECOLONNE; ligne++)
-		for (colonne = 0; colonne < NBLIGNECOLONNE; colonne++)
-			if (monSudoku_.at(ligne).at(colonne) == MAUVAISCHIFFRE)
+	for (ligne = 0; ligne < NBLIGNECOLONNE; ligne++) // Pour chaque ligne
+		for (colonne = 0; colonne < NBLIGNECOLONNE; colonne++) // Pour chaque colonne
+			if (monSudoku_.at(ligne).at(colonne) == MAUVAISCHIFFRE) // Vérifie si c'est 0
 				return true;
 	return false;
 }
 
 bool Sudoku::EstValide(int ligne, int colonne, int nombre)
 {
+	// Si on peut rien jouer. Le sudoku est invalide
 	return !UtiliserLigne(ligne, nombre) &&
 		!UtiliserColonne(colonne, nombre) &&
 		!UtiliserCadran(ligne - ligne % NBRECADRAN, colonne - colonne % NBRECADRAN, nombre);
@@ -75,19 +76,19 @@ bool Sudoku::EstValide(int ligne, int colonne, int nombre)
 bool Sudoku::Resoudre()
 {
 	int colonne, ligne;
-	if (!TrouvePosVide(ligne, colonne))
+	if (!TrouvePosVide(ligne, colonne)) // S'il n'y a pas de position vide. On a fini de résoudre
 		return true;
 
 	for (int num = 1; num <= NBLIGNECOLONNE; num++)
 	{
 		if (EstValide(ligne, colonne, num))
 		{
-			monSudoku_.at(ligne).at(colonne) = num;
+			monSudoku_.at(ligne).at(colonne) = num; // On met le nombre dans la case
 
 			if (Resoudre())
 				return true;
 
-			monSudoku_.at(ligne).at(colonne) = MAUVAISCHIFFRE;
+			monSudoku_.at(ligne).at(colonne) = MAUVAISCHIFFRE; // Si on peut pas mettre le nombre dans la case on met 0
 		}
 	}
 	return false;
@@ -96,7 +97,7 @@ bool Sudoku::Resoudre()
 bool Sudoku::UtiliserColonne(int colonne, int nombre)
 {
 	for (int ligne = 0; ligne < NBLIGNECOLONNE; ligne++)
-		if ((monSudoku_.at(ligne).at(colonne)) == nombre)
+		if ((monSudoku_.at(ligne).at(colonne)) == nombre) // Vérifie si le nombre est présent dans la colonne
 			return true;
 	return false;
 }
@@ -104,7 +105,7 @@ bool Sudoku::UtiliserColonne(int colonne, int nombre)
 bool Sudoku::UtiliserLigne(int ligne, int nombre)
 {
 	for (int col = 0; col < NBLIGNECOLONNE; col++)
-		if ((monSudoku_.at(ligne).at(col)) == nombre)
+		if ((monSudoku_.at(ligne).at(col)) == nombre) // Vérifie si le nombre est présent dans la ligne
 			return true;
 	return false;
 }
@@ -113,7 +114,7 @@ bool Sudoku::UtiliserCadran(int lignedepart, int colonnedepart, int nombre)
 {
 	for (int rangee = 0; rangee < NBRECADRAN; rangee++)
 		for (int col = 0; col < NBRECADRAN; col++)
-			if (monSudoku_.at(rangee + lignedepart).at(col + colonnedepart) == nombre)
+			if (monSudoku_.at(rangee + lignedepart).at(col + colonnedepart) == nombre) // Vérifie si le nombre est présent dans le cadran
 				return true;
 	return false;
 }
